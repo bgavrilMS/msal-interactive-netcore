@@ -52,5 +52,4 @@ If you want to use your own application coordinates, please follow these instruc
 
 #### Configure the code to use your application's coordinates
 
-1. Open the `active-directory-wpf-msgraph-v2\App.xaml.cs` file
-1. Find the app key `ClientId` and replace the existing value with the application ID (clientId) of the `WpfApp` application copied from the Azure portal.
+Open Program.cs and replace the ClientID string constant with the application / client ID for the app you just registred
