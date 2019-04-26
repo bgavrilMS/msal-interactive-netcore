@@ -23,6 +23,16 @@ This sample is pre-configured. If you just want to quickly run it just:
 
 2. Build and run using the `dotnet` command line or using Visual Studio or Visual Studio Code 
 
+### Notes about the user experience
+
+On most platforms, MSAL is able to pop-up a browser by hosting it in an UI panel. .NET core does not have an UI controls. 
+This solution uses the OS default browser, which is started as a separate process. Implications of this are: 
+
+- MSAL does not have control over the browser, e.g. MSAL cannot close the window, cannot detect if the user decides to navigate away etc. The app using MSAL can only set a cancellation token / timeout.
+- On succesful navigation to the redirect URI, the application can write a message back to the browser. The experience can be futher enhanced by redirecting the browser to a page of your choice. 
+- In order to capture the result of the authentication, MSAL listens to a localhost socket. Applications must register "http:\\localhost" as a redirect uri.
+- B2C does not support localhost redirect uri.
+
 ### [Optional] Use your own application coordinates
 If you want to use your own application coordinates, please follow these instructions:
 
@@ -53,3 +63,7 @@ If you want to use your own application coordinates, please follow these instruc
 #### Configure the code to use your application's coordinates
 
 Open Program.cs and replace the ClientID string constant with the application / client ID for the app you just registred
+
+### System diagram
+
+![flow of data](Extension.png)
