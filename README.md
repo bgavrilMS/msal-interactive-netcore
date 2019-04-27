@@ -8,7 +8,8 @@ service: Microsoft Graph
 endpoint: AAD V2
 ---
 
-This sample is for MSAL 3.x and previous MSAL versions do not support it.
+This sample is for showing how to use the UI Extensibility (to enable system browser integration) with MSAL 3.x. 
+Note: Previous MSAL versions do not support UI Extensibility.
 
 # .NET Core application signing in users interactively (Windows, Linux, Mac) with Microsoft and calling the Microsoft Graph
 
