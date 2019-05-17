@@ -1,4 +1,4 @@
-﻿using Microsoft.Identity.Client;
+using Microsoft.Identity.Client;
 using Microsoft.Identity.Client.Extensibility;
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,11 @@ namespace active_directory_netcore_interactive_v2
         private static readonly IEnumerable<string> s_scopes = new[] { "user.read" }; 
         private const string GraphAPIEndpoint = "https://graph.microsoft.com/v1.0/me";
 
+        private void MyLoggingMethod(LogLevel level, string message, bool containsPii)
+        {
+            Console.WriteLine($"MSAL {level} {containsPii} {message}");
+        }
+        
         static void Main(string[] args)
         {
             FetchTokenAndCallProtectedApiAsync().GetAwaiter().GetResult();
@@ -31,6 +36,9 @@ namespace active_directory_netcore_interactive_v2
             IPublicClientApplication pca = PublicClientApplicationBuilder
                            .Create(ClientId)
                            .WithRedirectUri(DefaultOsBrowserWebUi.FindFreeLocalhostRedirectUri()) // required for DefaultOsBrowser
+                           .WithLogging(MyLoggingMethod, LogLevel.Info,
+                               enablePiiLogging: true, 
+                               enableDefaultPlatformLogging: true)
                            .Build();
 
             AuthenticationResult authResult = await FetchTokenFromCacheAsync(pca).ConfigureAwait(false);
